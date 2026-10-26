@@ -1,0 +1,25 @@
+{
+  "name": "api-projeto-final",
+  "version": "1.0.0",
+  "description": ">LarMar, um sistema de agendamento de consultas para um resort. A plataforma permite a organizacao de datas e demais informações sobre consultas entre entre recepcao, doutores e clientes.",
+  "main": "index.js",
+  "type": "module",
+
+  "scripts": {
+  "dev": "node --watch --env-file=.env src/server.js",
+  "start": "node src/server.js"
+},
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Beatrice-Silva/api-projeto-final.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Beatrice-Silva/api-projeto-final/issues"
+  },
+  "homepage": "https://github.com/Beatrice-Silva/api-projeto-final#readme"
+}
