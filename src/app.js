@@ -1,70 +1,13 @@
 // app.js: monta a aplicação Express (rotas, middlewares).
 // Quem liga o servidor é o server.js. Separar os dois facilita testes e o deploy.
 import express from 'express';
+import { usuarios } from './data/usuarios';
+
 
 const app = express();
 
-const usuarios = [
-{
-  "id" : "1",
-  "nome" : "Raissa Molina",
-  "email" : "raissa@email.com",
-  "PerfiLRole" : "Admin"
-},
-{
-  "id" : "2",
-  "nome" : "Josephine Cleopatra Yuson",
-  "email" : "JoYuson@email.com",
-  "PerfilRole" : "Admin"
-},
-{
-  "id" : "3",
-  "nome" : "Raww",
-  "email" : "werewolf@email.com",
-  "PerfilRole" : "Cliente"
-},
-{
-  "id" : "4",
-  "nome" : "Reinaldo",
-  "email" : "reinaldo@email.com",
-  "PerfilRole" : "Cliente"
-}
 
-];
 
-const servicos = [
-{
-  id : "1",
-  "Consulta" : "Massagens",
-  "Duração" : "3h 30 minutos",
-  "Consulta" : "2400 peso filipino",
-  "status" : "inativo"
-},{
-  id : "2",
-  "Consulta" : "Restaurante",
-  "Duração" : "1h 30 minutos",
-  "Consulta" : "2400 peso filipino",
-  "status" : "ativo"
-},{
-  id : "3",
-  "Consulta" : "Sauna",
-  "Duração" : "3h",
-  "Consulta" : "2400 peso filipino",
-  "status" : "inativo"
-},{
-  id : "4",
-  "Consulta" : "Show de música",
-  "Duração" : "2h 30 minutos",
-  "Consulta" : "1400 peso filipino",
-  "status" : "ativo"
-},{
-  id : "5",
-  "Consulta" : "Massagens",
-  "Duração" : "3h 30 minutos",
-  "Consulta" : "2400 peso filipino",
-  "status" : "inativo"
-}
-]
 
 // Permite receber JSON no corpo das requisições (usaremos no próximo encontro)
 app.use(express.json());
@@ -91,18 +34,52 @@ app.get('/api/usuarios', (req, res) => {
   res.json(usuarios);
 });
 
-app.get('/api/servicos/:id', (req, res) => {
+app.get('/api/categorias', (req, res) => {
+  res.json(categorias);
+});
+
+app.get('/api/usuarios/:id', (req, res) => {
   const id = Number(req.params.id)
 
-  const servicos = servicos.find((l) => l.id === id)
+  const usuario = usuarios.find(u => u.id === id)
 
-  if(!servicos){
+  if(!usuario){
     return res.status(404).json({
       erro: "Falha! Serviço não encontrado."
     })
   }
 
-  res.json(servicos);
+  res.json(usuario);
+});
+
+
+app.get('/api/categorias/:id', (req, res) => {
+  const id = Number(req.params.id)
+
+  const categoria = categorias.find(c => c.id === id)
+
+  if(!categoria){
+    return res.status(404).json({
+      erro: "Falha! Categoria não encontrado."
+    })
+  }
+
+  res.json(categoria);
+});
+
+
+app.get('/api/servicos/:id', (req, res) => {
+  const id = Number(req.params.id)
+
+  const servico = servicos.find(s => s.id === id)
+
+  if(!servico){
+    return res.status(404).json({
+      erro: "Falha! Serviço não encontrado."
+    })
+  }
+
+  res.json(servico);
 });
 
 
