@@ -17,6 +17,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies":{
+    "express": "^5.1.0"
+  },
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/Beatrice-Silva/api-projeto-final/issues"
