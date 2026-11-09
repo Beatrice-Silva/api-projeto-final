@@ -4,7 +4,7 @@ import { listar, buscarPorId } from '../controllers/usuariosController.js';
 
 const usuRouter = Router();
 
-usuRouter.get('/', listar);
-usuRouter.get('/:id', buscarPorId);
+usuRouter.get('/listar', listarUsuarios);
+usuRouter.get('/usuarios/:id', buscarUsuarioPorId);
 
 export default usuRouter;

@@ -4,7 +4,7 @@ import { listar, buscarPorId } from '../controllers/servicosController.js';
 
 const servRouter = Router();
 
-servRouter.get('/', listar);
-servRouter.get('/:id', buscarPorId);
+servRouter.get('/listar', listarServicos);
+servRouter.get('/servicos/:id', buscarServicoPorId);
 
 export default servRouter;

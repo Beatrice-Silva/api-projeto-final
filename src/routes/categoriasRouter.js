@@ -4,7 +4,7 @@ import { listar, buscarPorId } from '../controllers/categoriasController.js';
 
 const cateRouter = Router();
 
-cateRouter.get('/', listar);
-cateRouter.get('/:id', buscarPorId);
+cateRouter.get('/listar', listarCategorias);
+cateRouter.get('/categorias/:id', buscarCategoriaPorId);
 
 export default cateRouter;
