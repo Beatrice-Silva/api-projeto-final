@@ -1,4 +1,5 @@
 // server.js: liga o servidor na porta definida no arquivo .env
+
 import app from './app.js';
 
 const PORT = process.env.PORT || 3333;
