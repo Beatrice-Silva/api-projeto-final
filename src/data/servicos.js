@@ -1,7 +1,7 @@
 export  const servicos = [
 {
   id : 1,
-  consulta : "Massagem",
+  titulo : "Massagem",
   duraçãominima : "3h 30 minutos",
   preço : "2400 peso filipino",
   status : "inativo",
@@ -9,21 +9,21 @@ export  const servicos = [
 },
   {
   id : 2,
-  consulta : "Restaurante",
+  titulo : "Restaurante",
   duraçãominima : "1h 30 minutos",
   consulta : "2400 peso filipino",
   status : "ativo",
   categoriaId : 2
 },{
   id : 3,
-  consulta : "Sauna",
+  titulo : "Sauna",
   duraçãominima : "3h",
   consulta : "2400 peso filipino",
   status : "inativo",
   categoriaId : 1
 },{
   id : 4,
-  consulta : "Show de música",
+  titulo : "Show de música",
   duraçãominima : "2h 30 minutos",
   consulta : "1400 peso filipino",
   status : "ativo",
@@ -31,7 +31,7 @@ export  const servicos = [
 },
 {
   id : 5,
-  consulta : "Hit Academia",
+  titulo : "Hit Academia",
   duraçãominima : "2h 30 minutos",
   preço : "5400 peso filipino",
   status : "ativo",
