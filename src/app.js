@@ -1,10 +1,12 @@
 // app.js: monta a aplicação Express (rotas, middlewares).
 // Quem liga o servidor é o server.js. Separar os dois facilita testes e o deploy.
 import express from 'express';
+
 import { usuarios } from './data/usuarios';
-
-
 const app = express();
+import * as categoriasController from './controllers/categoriasController.js';
+import * as servicosController from './controllers/servicosController.js';
+import * as usuariosController from './controllers/usuariosController.js';
 
 
 

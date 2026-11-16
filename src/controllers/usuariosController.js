@@ -18,3 +18,4 @@ export function buscarPorId(req, res){
 
   res.json(usuario);
 };
+
