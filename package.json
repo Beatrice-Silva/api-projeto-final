@@ -16,7 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.3.0"
+    "express": "^5.3.0",
+    "exprss": "^0.0.1-security"
   },
   "bugs": {
     "url": "https://github.com/Beatrice-Silva/api-projeto-final/issues"
