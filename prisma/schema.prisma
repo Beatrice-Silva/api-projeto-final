@@ -33,5 +33,5 @@ model Servicos {
   categoriaId Int
   categoria   Categoria @relation(fields: [categoriaId], references: [id])
 
-  @@map("Sericos")
+  @@map("servicos")
 }

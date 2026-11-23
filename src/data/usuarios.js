@@ -1,4 +1,4 @@
-export  const usuarios = [
+/*export  const usuarios = [
 {
   id : 1,
   nome : "Raissa Molina",
@@ -32,4 +32,4 @@ export  const usuarios = [
   criadoEm: ""
 }
 
-];
+];*/

@@ -26,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/Beatrice-Silva/api-projeto-final/issues"
   },
-  "homepage": "https://github.com/Beatrice-Silva/api-projeto-final#readme"
+  "homepage": "https://github.com/Beatrice-Silva/api-projeto-final#readme",
+  "devDependencies": {}
 }

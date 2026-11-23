@@ -1,4 +1,4 @@
-//array da categoria de consultas 
+/*array da categoria de consultas 
 export const categorias = [
   {
   categoriaId : 1,
@@ -14,4 +14,4 @@ export const categorias = [
   categoria : "entreterimento",
 }
 
-]
+]*/

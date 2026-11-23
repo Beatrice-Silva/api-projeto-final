@@ -1,69 +1,91 @@
-import { servicos } from '../data/servicos.js';
+// Controller: as regras de cada operação de servicos. Os dados vêm do banco (Prisma).
+import { prisma } from '../lib/prisma.js';
 
-export function listar(req, res){
-    res.json(servicos)
+// GET /api/servicos
+export async function listar(req, res) {
+  const servicos = await prisma.servico.findMany({ orderBy: { id: 'asc' } });
+  res.json(servicos);
 }
 
-export function buscarPorId(req, res){
-  const id = Number(req.params.id)
-
-  const servico = servicos.find(s => s.id === id)
-
-  if(!servico){
-    return res.status(404).json({
-      erro: "Falha! Serviço não encontrado."
-    })
+// GET /api/servicos/:id
+export async function buscarPorId(req, res) {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ erro: 'O id precisa ser um número' });
   }
-
+  const servico = await prisma.servico.findUnique({ where: { id } });
+  if (!servico) {
+    return res.status(404).json({ erro: 'Serviço não encontrado' });
+  }
   res.json(servico);
-};
+}
 
-// req.body vem vazio (undefined) se o cliente não enviar JSON; ?? {} evita o erro
-  
-export function criar(req, res) {
-  const { titulo, prioridade, status } = req.body ?? {};
-  if (!titulo) {
-    return res.status(400).json({ erro: 'O campo titulo é obrigatório' });
+// POST /api/servicos
+export async function criar(req, res) {
+  // req.body vem vazio (undefined) se o cliente não enviar JSON; ?? {} evita o erro
+  const { nome, duracaoMin, preco, status, categoriaId } = req.body ?? {};
+  if (!nome) {
+    return res.status(400).json({ erro: 'O campo nome é obrigatório' });
   }
-  const novoId = chamados.length > 0 ? chamados[chamados.length - 1].id + 1 : 1;
-  
-  const novo = {
-    id: novoId,
-    consulta,
-    duraçãominima,
-    preço,
-    status: status ?? 'aberto',
-    categoriaId,
-  };
-  servicos.push(novo);
+  if (!categoriaId) {
+    return res.status(400).json({ erro: 'O campo categoriaId é obrigatório' });
+  }
+  const categoria = await prisma.categoria.findUnique({ where: { id: Number(categoriaId) } });
+  if (!categoria) {
+    return res.status(400).json({ erro: 'categoriaId não existe' });
+  }
+  // campos que não chegaram ficam undefined: o banco usa o valor padrão ou deixa vazio
+  const novo = await prisma.servico.create({
+    data: {
+      titulo,
+      duracaoMinima,
+      preco,
+      status,
+      categoriaId: categoria.id,
+    },
+  });
   res.status(201).json(novo);
 }
 
-// PUT /api/chamados/:id
 
-export function atualizar(req, res) {
+// PUT /api/servicos/:id
+export async function atualizar(req, res) {
   const id = Number(req.params.id);
-  const posicao = servicos.findIndex((c) => c.id === id);
-  if (posicao === -1) {
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ erro: 'O id precisa ser um número' });
+  }
+  const existe = await prisma.servico.findUnique({ where: { id } });
+  if (!existe) {
     return res.status(404).json({ erro: 'Serviço não encontrado' });
   }
   const dados = req.body ?? {};
+  if (dados.nome === '') {
+    return res.status(400).json({ erro: 'O campo nome não pode ficar vazio' });
+  }
 
-  // junta o que já existia com o que chegou; o id nunca muda
-  const atualizado = { ...chamados[posicao], ...dados, id };
-  chamados[posicao] = atualizado;
+  // campos que não chegaram ficam undefined, e o Prisma não os altera
+  const atualizado = await prisma.servico.update({
+    where: { id },
+    data: {
+      nome: dados.nome,
+      duracaoMin: dados.duracaoMin,
+      preco: dados.preco,
+      status: dados.status,
+    },
+  });
   res.json(atualizado);
 }
 
-// DELETE /api/chamados/:id
-export function excluir(req, res) {
+// DELETE /api/servicos/:id
+export async function excluir(req, res) {
   const id = Number(req.params.id);
-  const posicao = servicos.findIndex((c) => c.id === id);
-  if (posicao === -1) {
-    return res.status(404).json({ erro: 'Chamado não encontrado' });
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ erro: 'O id precisa ser um número' });
   }
-  servivos.splice(posicao, 1);
+  const existe = await prisma.servico.findUnique({ where: { id } });
+  if (!existe) {
+    return res.status(404).json({ erro: 'Serviço não encontrado' });
+  }
+  await prisma.servico.delete({ where: { id } });
   res.status(204).send();
 }
-
-

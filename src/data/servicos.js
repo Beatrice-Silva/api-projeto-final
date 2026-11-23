@@ -1,4 +1,4 @@
-export  const servicos = [
+/*export  const servicos = [
 {
   id : 1,
   titulo : "Massagem",
@@ -37,4 +37,4 @@ export  const servicos = [
   status : "ativo",
   categoriaId : 3
 },
-]
+]*/
